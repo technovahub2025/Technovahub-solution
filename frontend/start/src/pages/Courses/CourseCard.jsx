@@ -39,7 +39,7 @@ const CourseCard = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
         <div data-aos="fade-up">
-          <Title text="Courses Offered" />
+          <Title text="Internship Offered" />
         </div>
 
         {/* Courses Grid */}

@@ -50,7 +50,7 @@ const Coursebanner = () => {
 
         <div className="backdrop-blur-md bg-white/40 p-6 rounded-2xl inline-block shadow-xl border border-white/20">
           <h1 className="text-3xl md:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg animate-fadeInUp">
-            Course <span className="text-blue-400">Offered</span>
+            Internshiop <span className="text-blue-400">Offered</span>
           </h1>
           <p className="mt-3 text-blue-100 text-sm md:text-lg font-light text-blue-400 animate-fadeInUp delay-200">
             Empowering innovation through hands-on training and real-world learning.

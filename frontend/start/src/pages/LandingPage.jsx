@@ -17,9 +17,9 @@ const LandingPage = () => {
     <div>
       <HeroBanner/>
       <VisionMission/>
-      
-       <CourseCard/>
        <SoftwareSolutions/>
+       <CourseCard/>
+      
     
       <AboutUsSection/>
        <Ourfacilities/>

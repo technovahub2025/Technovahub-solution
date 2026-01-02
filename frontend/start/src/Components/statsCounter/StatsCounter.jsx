@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // ✅ Counter Hook (unchanged but smooth)
-const useCounter = (end, duration = 2000) => {
+const useCounter = (end, duration = 4000) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const useCounter = (end, duration = 2000) => {
 
 // ✅ Stats Data
 const stats = [
-  { number: 1300, label: "Students Trained" },
+  { number: 1800, label: "Students Trained" },
   { number: 800, label: "Entrepreneurs Trained" },
   { number: 10, label: "Awards Won" },
   { number: 15, label: "Courses Offered" },

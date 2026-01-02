@@ -27,7 +27,7 @@ const Marquee = () => {
       </div>
 
       {/* Custom Animation */}
-      <style jsx>{`
+      <style>{`
         @keyframes marquee {
           0% {
             transform: translateX(0);

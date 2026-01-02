@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import adsImg from "../assets/images/newads.jpg";
 import { Link } from "react-router-dom";
 
-const MotionLink = motion(Link); // ✅ wrap Link for animation
+const MotionLink = motion.create(Link); // ✅ wrap Link for animation
 
 const Homeseven = () => {
   return (

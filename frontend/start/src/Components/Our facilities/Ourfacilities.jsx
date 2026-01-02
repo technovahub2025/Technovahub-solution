@@ -25,7 +25,7 @@ const cards = [
   },
   {
     icon: <BsFillJournalBookmarkFill className="w-14 h-14 text-blue-600 mb-4" />,
-    title: "Study Hall",
+    title: "Seminar Hall",
     desc: "A quiet and resourceful environment for deep study and research. 📚",
   },
 ];

@@ -1,90 +1,228 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import banner1 from "../assets/images/indoor.jpg";
-import banner2 from "../assets/images/train.jpg";
-import banner3 from "../assets/images/akshaya.jpg";
-import banner4 from "../assets/images/4.jpg";
-import banner5 from "../assets/images/mastery.jpg";
-import banner6 from "../assets/images/mithran.jpg";
-
-import logo from "../assets/images/logoremove.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
-  const images = [banner2, banner5, banner6, banner3, banner4, banner1];
-  const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    AOS.init({ duration: 1200, once: true });
+    AOS.init({
+      duration: 1000,
+      easing: "ease-out-cubic",
+      once: true,
+    });
+  }, []);
 
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []); // images length won't change at runtime
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Neuron {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.radius = Math.random() * 3 + 2;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        this.pulse += this.pulseSpeed;
+      }
+
+      draw() {
+        const pulseSize = Math.sin(this.pulse) * 2;
+
+        // Outer glow
+        const gradient = ctx.createRadialGradient(
+          this.x,
+          this.y,
+          0,
+          this.x,
+          this.y,
+          this.radius + pulseSize + 10
+        );
+        gradient.addColorStop(0, "rgba(0, 212, 255, 0.8)");
+        gradient.addColorStop(0.5, "rgba(123, 47, 247, 0.4)");
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius + pulseSize + 10, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Core neuron
+        ctx.fillStyle = "#00d4ff";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius + pulseSize, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Inner bright spot
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.beginPath();
+        ctx.arc(this.x - 1, this.y - 1, this.radius / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const neurons = [];
+    const neuronCount = 80;
+    const maxDistance = 150;
+
+    for (let i = 0; i < neuronCount; i++) {
+      neurons.push(
+        new Neuron(Math.random() * canvas.width, Math.random() * canvas.height)
+      );
+    }
+
+    const drawConnection = (n1, n2, distance) => {
+      const opacity = 1 - distance / maxDistance;
+
+      const gradient = ctx.createLinearGradient(n1.x, n1.y, n2.x, n2.y);
+      gradient.addColorStop(0, `rgba(0, 212, 255, ${opacity * 0.3})`);
+      gradient.addColorStop(0.5, `rgba(123, 47, 247, ${opacity * 0.4})`);
+      gradient.addColorStop(1, `rgba(0, 212, 255, ${opacity * 0.3})`);
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = opacity * 2;
+      ctx.beginPath();
+      ctx.moveTo(n1.x, n1.y);
+      ctx.lineTo(n2.x, n2.y);
+      ctx.stroke();
+    };
+
+    const animate = () => {
+      ctx.fillStyle = "rgba(10, 14, 39, 0.15)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < neurons.length; i++) {
+        for (let j = i + 1; j < neurons.length; j++) {
+          const distance = Math.hypot(
+            neurons[j].x - neurons[i].x,
+            neurons[j].y - neurons[i].y
+          );
+          if (distance < maxDistance) drawConnection(neurons[i], neurons[j], distance);
+        }
+      }
+
+      neurons.forEach((neuron) => {
+        neuron.update();
+        neuron.draw();
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Resize handling
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Mouse interaction
+    const handleMouseMove = (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      neurons.forEach((neuron) => {
+        const distance = Math.hypot(mouseX - neuron.x, mouseY - neuron.y);
+        if (distance < 100) {
+          const angle = Math.atan2(mouseY - neuron.y, mouseX - neuron.x);
+          neuron.vx -= Math.cos(angle) * 0.05;
+          neuron.vy -= Math.sin(angle) * 0.05;
+        }
+      });
+    };
+    canvas.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  const handleClick = () => {
+    navigate("/about");
+  };
 
   return (
-    <header className="relative md:min-h-screen h-[50vh] flex items-center justify-center text-center text-[#002f6c] overflow-hidden">
-      {/* Background slides */}
-      {images.map((img, index) => (
-        <div
-          key={index}
-          aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-          style={{
-            backgroundImage: `url(${img})`,
-            opacity: index === current ? 1 : 0,
-            willChange: "opacity",
-          }}
-        />
-      ))}
+    <header className="relative md:min-h-screen h-[25vh] flex items-center justify-center text-center overflow-hidden mt-25">
+      {/* Neural Background Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full z-0"
+      ></canvas>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-white/80 z-10" aria-hidden="true" />
-
-      {/* Content */}
-      <div className="relative z-20 max-w-7xl px-5">
-        {/* Logo */}
-        <div
-          className="w-[240px] h-[200px] md:w-[480px] md:h-[400px] mt-3 rounded-lg flex items-center justify-center"
-          data-aos="zoom-in"
+      {/* Foreground Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-[80vh] px-6">
+        <h1
+          data-aos="fade-down"
+          className="font-extrabold tracking-wide
+                     text-2xl sm:text-3xl md:text-4xl
+                     bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600
+                     bg-clip-text text-transparent"
         >
-          <img
-            src={logo}
-            alt="TechNova Hub logo"
-            className="object-contain w-full h-full"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
+          WE ARE REIMAGINING
+        </h1>
 
-        <div className="flex gap-2 justify-center">
-          {/* External (Google Form) */}
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSesAnC00FPStzrs3z22PtnItYt24iHvaXPLIABUTe8WMWJC7A/viewform?usp=sharing&ouid=101727743134439473534"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-500 border-2 border-white p-2 md:py-3 md:px-10 px-6 font-medium text-white text-[10px] md:text-[15px] rounded-md hover:bg-blue-600 transition-colors"
-            data-aos="fade-up"
-            aria-label="Open enquiry form in a new tab"
-          >
-            Enquiry Now
-          </a>
+        <h2
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="mt-4 font-extrabold tracking-widest text-gray-200
+                     text-xl sm:text-2xl md:text-3xl"
+        >
+          THE RELATIONSHIP <br /> BETWEEN
+        </h2>
 
-          {/* Internal route (react-router) */}
-          <Link
-            to="/7Days-AI-innovation"
-           
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-500 border-2 border-white p-2 md:py-3 md:px-6 font-medium text-white text-[10px] md:text-[15px] rounded-md hover:bg-blue-600 transition-colors"
-            data-aos="fade-up"
-            aria-label="Open 7 Days AI Workshop page"
-          >
-            7 Days AI Challanges
-          </Link>
-        </div>
+        <h1
+          data-aos="zoom-in"
+          data-aos-delay="400"
+          className="mt-3 font-[cursive]
+                     text-3xl sm:text-4xl md:text-5xl
+                     bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600
+                     bg-clip-text text-transparent"
+        >
+          Automation & Innovation
+        </h1>
+
+        <div
+          data-aos="fade-right"
+          data-aos-delay="600"
+          className="w-63 h-1 mt-3 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600"
+        ></div>
+
+        <p
+          data-aos="fade-up"
+          data-aos-delay="700"
+          className="mt-6 max-w-2xl text-gray-100 text-base sm:text-lg leading-relaxed tracking-wide hover:text-blue-400 transition-colors duration-300"
+        >
+          We automate the routine, so you can innovate the extraordinary
+        </p>
+
+        <button
+          data-aos="zoom-in"
+          data-aos-delay="1200"
+          onClick={handleClick}
+          className="mt-8 text-white font-semibold px-8 py-3 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600 rounded-md cursor-pointer transform transition-transform duration-500 ease-in-out hover:scale-110"
+        >
+          DISCOVER MORE
+        </button>
       </div>
     </header>
   );
