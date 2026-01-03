@@ -44,9 +44,9 @@ const VisionMission = () => {
 
             <p className="text-gray-700 text-sm md:text-lg  leading-relaxed">
               Our vision is to become a nationally recognized hub of excellence
-              in <span className="text-blue-600 font-medium">technology education</span>, IT services,
-              and automation-driven innovation. We aim to nurture
-              <span className="text-cyan-600 font-medium"> future-ready talent </span> and deliver
+              in <span className="text-blue-600 font-medium">technology education</span>, IT services
+              and automation driven innovation. We aim to nurture
+              <span className="text-cyan-600 font-medium"> future ready talent </span> and deliver
               transformative solutions that empower industries to advance.
             </p>
           </div>
@@ -68,10 +68,10 @@ const VisionMission = () => {
 
             <p className="text-gray-700  text-sm   md:text-lg leading-relaxed">
               Our mission is to empower learners with
-              <span className="text-blue-600 font-medium"> industry-relevant skills </span> through
-              hands-on training and real-world projects. We bridge the gap
-              between academics and practical application — creating
-              <span className="text-cyan-600 font-medium"> future-ready professionals </span> and
+              <span className="text-blue-600 font-medium"> industry relevant skills </span> through
+              hands on training and real world projects. We bridge the gap
+              between academics and practical application creating
+              <span className="text-cyan-600 font-medium"> future ready professionals </span> and
               supporting businesses with
               <span className="text-blue-500 font-medium"> automation and IT solutions</span>.
             </p>

@@ -3,6 +3,7 @@ import { FaBookReader } from "react-icons/fa";
 import { GrWorkshop } from "react-icons/gr";
 import { SiGoogleclassroom } from "react-icons/si";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
+import { MdMeetingRoom } from "react-icons/md";
 import Title from "../Title";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -23,11 +24,11 @@ const cards = [
     title: "Class Rooms",
     desc: "Spacious, well-lit, and comfortable classrooms that inspire focused learning. 🌞",
   },
-  {
-    icon: <BsFillJournalBookmarkFill className="w-14 h-14 text-blue-600 mb-4" />,
-    title: "Seminar Hall",
-    desc: "A quiet and resourceful environment for deep study and research. 📚",
-  },
+{
+  icon: <MdMeetingRoom className="w-14 h-14 text-blue-600 mb-4" />,
+  title: "Seminar Hall",
+  desc: "Spacious and well-equipped hall designed for productive discussions and learning sessions.",
+}
 ];
 
 const Ourfacilities = () => {

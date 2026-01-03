@@ -21,7 +21,7 @@ const LandingPage = () => {
        <CourseCard/>
       
     
-      <AboutUsSection/>
+      {/* <AboutUsSection/> */}
        <Ourfacilities/>
       
       

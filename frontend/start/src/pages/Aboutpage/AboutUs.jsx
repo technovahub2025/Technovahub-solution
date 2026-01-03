@@ -21,111 +21,104 @@ const item = {
 
 const AboutUs = () => {
   return (
-    <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden">
+<section className="relative w-full min-h-[90vh] flex items-center overflow-hidden bg-white">
+  
+  {/* Content */}
+  <motion.div
+    className="relative z-10 max-w-7xl mx-auto px-6 py-20"
+    variants={container}
+    initial="hidden"
+    animate="show"
+  >
+    <div className="max-w-3xl">
 
-      {/* Background Image Animation */}
-      <motion.img
-        src={aboutImg}
-        alt="Technovahub Technology"
-        className="absolute inset-0 w-full h-full object-cover"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-      />
-
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/95 via-blue-800/85 to-blue-700/80"></div>
-
-      {/* Content */}
-      <motion.div
-        className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-white"
-        variants={container}
-        initial="hidden"
-        animate="show"
+      {/* Main Heading */}
+      <motion.h1
+        variants={item}
+        className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-gray-900"
       >
-        <div className="max-w-3xl">
+        EMPOWERING INTELLIGENT <br />
+        {/* Gradient adjusted to be darker so it reads well on white */}
+        <span className="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">
+          SOLUTIONS
+        </span>
+      </motion.h1>
 
-          <motion.h1
+      {/* Sub Heading - Dark Blue/Gray for hierarchy */}
+      <motion.h2
+        variants={item}
+        className="mt-4 text-lg sm:text-xl font-semibold tracking-wide text-gray-800"
+      >
+        CONNECTING INNOVATION WITH IMPACT
+      </motion.h2>
+
+      {/* Paragraph - Dark Gray for comfortable reading */}
+      <motion.p
+        variants={item}
+        className="mt-6 text-gray-600 text-base sm:text-lg leading-relaxed"
+      >
+        At <span className="font-bold text-black">Technovahub</span>, we build
+        smart systems and 
+        <span className="text-blue-600 font-semibold"> AI-powered platforms </span>
+        that streamline operations, enhance decision making and drive digital
+        growth for businesses worldwide.
+      </motion.p>
+
+      <motion.p
+        variants={item}
+        className="mt-4 text-gray-600 text-base sm:text-lg leading-relaxed"
+      >
+        By combining advanced technology with a
+        <span className="text-blue-600 font-semibold"> people-first mindset</span>,
+        we enable smarter decisions and sustainable growth.
+      </motion.p>
+
+      {/* Services List */}
+      <motion.ul
+        className="mt-8 space-y-4 text-base sm:text-lg"
+        variants={container}
+      >
+        {[
+          "IT Services & Consulting",
+          "AI & Intelligent Automation",
+          "Digital Transformation Solutions",
+        ].map((service, index) => (
+          <motion.li
+            key={index}
             variants={item}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
+            className="flex items-center gap-3 text-gray-700 font-medium"
           >
-            BUILDING SMARTER <br />
-            <span className="text-blue-300">CONNECTIONS</span>
-          </motion.h1>
+            {/* Checkmark in Blue to match branding */}
+            <span className="text-blue-600 text-xl">✔</span>
+            <span className="hover:text-black transition-colors duration-200">
+              {service}
+            </span>
+          </motion.li>
+        ))}
+      </motion.ul>
 
-          <motion.h2
-            variants={item}
-            className="mt-4 text-lg sm:text-xl font-semibold tracking-wide text-blue-100"
-          >
-            BETWEEN PEOPLE AND TECHNOLOGY
-          </motion.h2>
+      {/* Download Button */}
+      <motion.a
+        href={CompanyProfile}
+        download
+        variants={item}
+        className="
+          inline-flex items-center gap-3 mt-10 px-8 py-3
+          bg-gradient-to-r from-blue-700 to-cyan-600
+          text-white font-semibold rounded-full
+          shadow-lg shadow-blue-500/20
+          hover:shadow-blue-500/40 hover:scale-105 
+          transition-all duration-300
+        "
+      >
+        Download Company Profile
+      </motion.a>
 
-          <motion.p
-            variants={item}
-            className="mt-6 text-blue-100 text-base sm:text-lg leading-relaxed"
-          >
-            At <span className="font-semibold text-white">Technovahub</span>, we deliver intelligent IT services,
-            AI-driven solutions, and digital transformation strategies that help
-            businesses innovate, scale, and stay future-ready.
-          </motion.p>
+    </div>
+  </motion.div>
+</section>
 
-          <motion.p
-            variants={item}
-            className="mt-4 text-blue-100 text-base sm:text-lg leading-relaxed"
-          >
-            By combining advanced technology with a people-first mindset, we
-            enable smarter decisions and sustainable growth.
-          </motion.p>
 
-          {/* Services */}
-          <motion.ul
-            className="mt-8 space-y-4 text-base sm:text-lg"
-            variants={container}
-          >
-            {[
-              "IT Services & Consulting",
-              "AI & Intelligent Automation",
-              "Digital Transformation Solutions",
-            ].map((service, index) => (
-              <motion.li
-                key={index}
-                variants={item}
-                className="flex items-center gap-3"
-              >
-                <span className="text-blue-300 text-xl">✔</span>
-                {service}
-              </motion.li>
-            ))}
-          </motion.ul>
-
-          {/* Brand */}
-          <motion.div variants={item} className="mt-10">
-            <h3 className="text-2xl font-bold tracking-wide">
-              TECHNOVAHUB
-            </h3>
-            <p className="text-blue-200 mt-1">
-              Advancing People and Technology Together
-            </p>
-          </motion.div>
-
-          {/* Download Button */}
-          <motion.a
-            href={CompanyProfile}
-            download
-            variants={item}
-            className="inline-flex items-center gap-3 mt-10 px-8 py-3
-                       bg-gradient-to-r from-blue-500 via-blue-400 to-cyan-500
-                       text-white font-semibold rounded-full
-                       shadow-lg hover:shadow-2xl
-                       hover:scale-105 transition-transform duration-300"
-          >
-            Download Company Profile
-          </motion.a>
-
-        </div>
-      </motion.div>
-
-    </section>
   );
 };
 

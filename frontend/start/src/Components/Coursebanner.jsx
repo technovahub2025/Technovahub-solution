@@ -6,7 +6,7 @@ import banner4 from "../assets/images/4.jpg";
 import logo from "../assets/images/logoremove.png";
 
 const Coursebanner = () => {
-  const images = [banner1, banner2, banner3, banner4];
+  const images = [ banner2, banner3, banner4,banner1,];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -17,8 +17,9 @@ const Coursebanner = () => {
   }, []);
 
   return (
-    <header className="relative h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+<header className="relative h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden mt-[100px]">
       {/* === Background Slideshow === */}
+      <div></div>
       {images.map((img, index) => (
         <div
           key={index}
@@ -33,29 +34,29 @@ const Coursebanner = () => {
       ))}
 
       {/* === Gradient Overlay === */}
-      <div className="absolute inset-0 bg-white/70" />
+      <div className="absolute inset-0 bg-red/70" />
 
       {/* === Subtle Particles / Glow === */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(191, 182, 182, 0.08)_0%,transparent_70%)]" />
 
       {/* === Content === */}
       <div className="relative z-20 text-center px-6">
-        <div className="mx-auto mb-6 flex justify-center">
+        {/* <div className="mx-auto mb-6 flex justify-center">
           <img
             src={logo}
             alt="Technovahub Logo"
             className="w-24 md:w-32 drop-shadow-lg animate-pulse"
           />
-        </div>
+        </div> */}
 
-        <div className="backdrop-blur-md bg-white/40 p-6 rounded-2xl inline-block shadow-xl border border-white/20">
+        {/* <div className="backdrop-blur-md bg-white/40 p-6 rounded-2xl inline-block shadow-xl border border-white/20">
           <h1 className="text-3xl md:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg animate-fadeInUp">
             Internshiop <span className="text-blue-400">Offered</span>
           </h1>
           <p className="mt-3 text-blue-100 text-sm md:text-lg font-light text-blue-400 animate-fadeInUp delay-200">
             Empowering innovation through hands-on training and real-world learning.
           </p>
-        </div>
+        </div> */}
       </div>
 
       {/* === Custom Animations === */}

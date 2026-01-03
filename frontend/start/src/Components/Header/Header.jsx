@@ -20,6 +20,7 @@ const navItems = [
     link: [
       { name: "Gallery", path: "/gallery" },
       { name: "7Days-Ai-challange", path: "/7Days-AI-innovation" },
+      { name: "Young Innovator", path: "/7Days-AI-innovation" },
     ],
   },
   {

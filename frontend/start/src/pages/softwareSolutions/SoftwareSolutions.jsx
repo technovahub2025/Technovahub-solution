@@ -5,6 +5,69 @@ import { Sparkles, Cpu, Code, Cloud } from "lucide-react"; // icons
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+
+const services = [
+  {
+    "_id": "68da69531713a66d0bb50c53",
+    "title": "Custom Software Development",
+    "description": "We deliver tailored software solutions to solve your specific business problems.",
+    "__v": 0
+  },
+  {
+    "_id": "68da69661713a66d0bb50c55",
+    "title": "Cloud Integration",
+    "description": "Empower your business with scalable and secure cloud based applications integrated into your workflow.",
+    "__v": 0
+  },
+  {
+    "_id": "68da698e1713a66d0bb50c57",
+    "title": "Secure App Development",
+    "description": "Build software with strong security principles and latest best practices for peace of mind and compliance.",
+    "__v": 0
+  },
+
+  {
+    "_id": "68da69b11713a66d0bb50c5b",
+    "title": "WhatsApp Automation",
+    "description": "Streamline customer communication with automated WhatsApp messaging, reminders and real time updates to improve engagement.",
+    "__v": 0
+  },
+  {
+    "_id": "68da69c41713a66d0bb50c5d",
+    "title": "Instagram Automation",
+    "description": "Grow your online presence with automated posting, audience interaction and insights to save time and boost reach.",
+    "__v": 0
+  },
+  {
+    "_id": "68da69db1713a66d0bb50c5f",
+    "title": "Email Automation",
+    "description": "Automate your email campaigns with personalized messages, scheduling and analytics to drive conversions and customer loyalty.",
+    "__v": 0
+  },
+  {
+    "_id": "68da69f11713a66d0bb50c61",
+    "title": "Accounting Dashboard",
+    "description": "Track expenses, invoices and financial reports in a centralized dashboard designed for smarter business decisions.",
+    "__v": 0
+  },
+  {
+    "_id": "68da6a021713a66d0bb50c63",
+    "title": "Sales Dashboard",
+    "description": "Visualize and monitor your sales pipeline, KPIs and performance metrics with interactive dashboards for faster growth.",
+    "__v": 0
+  },
+  {
+    "_id": "68da6a221713a66d0bb50c65",
+    "title": "Employee Tracking",
+    "description": "Monitor employee performance, attendance and productivity with smart tracking tools designed to enhance accountability and efficiency.",
+    "__v": 0
+  },
+
+];
+
+
+
+
 const SoftwareSolutions = () => {
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,8 +81,8 @@ const SoftwareSolutions = () => {
 
     const fetchData = async () => {
       try {
-        const response = await getSoftwareSolutionApi();
-        setSolutions(response.data || []);
+      
+        setSolutions(services || []);
       } catch (error) {
         console.error("Error fetching software solutions:", error);
         setSolutions([]);

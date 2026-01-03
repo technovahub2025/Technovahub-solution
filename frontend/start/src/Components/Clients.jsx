@@ -79,32 +79,43 @@ const Clients = () => {
       {/* CLIENTS */}
       <div className="max-w-6xl mx-auto px-6 text-center">
         <Title text="Our Clients" />
-        <p className="text-blue-200 mt-4 mb-10 text-lg font-light">
-          Trusted by global leaders who believe in innovation and precision.
-        </p>
+        <p className="text-blue-700 mt-4 mb-10 text-lg font-light">
+  Trusted by global leaders who believe in innovation and precision.
+</p>
 
-        <div className="overflow-hidden group">
-          <div className="flex w-max animate-marquee-left group-hover:[animation-play-state:paused]">
-            {clients.concat(clients).map((client, idx) => (
-              <div
-                key={`client-${idx}`}
-                className="flex items-center justify-center w-40 h-24 bg-white/10 backdrop-blur-md rounded-xl shadow-md mx-6 hover:scale-110 hover:bg-white/20 transition-all duration-300"
-              >
-                <img
-                  src={client.src}
-                  alt={client.alt}
-                  className="max-h-14 object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+
+      <div className="max-w-7xl mx-auto px-6">
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+
+    {clients.slice(0, 16).map((client, idx) => (
+      <div
+        key={`client-${idx}`}
+        className="
+          flex items-center justify-center
+          w-full h-28
+          bg-white/10 backdrop-blur-md
+          rounded-xl shadow-md
+          hover:scale-110 hover:bg-white/20
+          transition-all duration-300
+        "
+      >
+        <img
+          src={client.src}
+          alt={client.alt}
+          className="max-h-17 object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+        />
+      </div>
+    ))}
+
+  </div>
+</div>
+
       </div>
 
       {/* INDUSTRIAL EXPERTS */}
       <div className="max-w-6xl mx-auto px-6 text-center mt-24">
         <Title text="Get in Touch with Industrial Experts" />
-        <p className="text-blue-200 mt-4 mb-10 text-lg font-light">
+        <p className="text-blue-700 mt-4 mb-10 text-lg font-light">
           Collaborating with top industry pioneers shaping the future of technology.
         </p>
 

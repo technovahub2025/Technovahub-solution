@@ -28,7 +28,7 @@ const Banner = () => {
         this.y = y;
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
-        this.radius = Math.random() * 3 + 2;
+        this.radius = 2;
         this.pulse = Math.random() * Math.PI * 2;
         this.pulseSpeed = Math.random() * 0.02 + 0.01;
       }
@@ -53,11 +53,11 @@ const Banner = () => {
           0,
           this.x,
           this.y,
-          this.radius + pulseSize + 10
+          this.radius + pulseSize + 1
         );
-        gradient.addColorStop(0, "rgba(0, 212, 255, 0.8)");
-        gradient.addColorStop(0.5, "rgba(123, 47, 247, 0.4)");
-        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+        gradient.addColorStop(0, "rgba(0, 212, 255, 0.1)");
+        gradient.addColorStop(0.5, "rgba(150, 90, 255, 0.05)");
+        gradient.addColorStop(1, "rgba(10, 14, 39, 0)");
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
@@ -105,7 +105,7 @@ const Banner = () => {
     };
 
     const animate = () => {
-      ctx.fillStyle = "rgba(10, 14, 39, 0.15)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < neurons.length; i++) {
@@ -162,69 +162,77 @@ const Banner = () => {
   };
 
   return (
-    <header className="relative md:min-h-screen h-[25vh] flex items-center justify-center text-center overflow-hidden mt-25">
-      {/* Neural Background Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-0"
-      ></canvas>
+  <header className="relative md:min-h-screen h-auto flex items-center justify-center text-center overflow-hidden pt-24 md:pt-0">
+  {/* Neural Background Canvas */}
+  <canvas
+    ref={canvasRef}
+    className="absolute inset-0 w-full h-full z-0"
+  ></canvas>
 
-      {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-[80vh] px-6">
-        <h1
-          data-aos="fade-down"
-          className="font-extrabold tracking-wide
-                     text-2xl sm:text-3xl md:text-4xl
-                     bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600
-                     bg-clip-text text-transparent"
-        >
-          WE ARE REIMAGINING
-        </h1>
+  {/* Foreground Content */}
+  <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 md:py-0">
+    
+    {/* Main Heading */}
+    <h1
+      data-aos="fade-down"
+      className="font-extrabold tracking-wide text-2xl sm:text-3xl md:text-4xl 
+                 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600
+                 bg-clip-text text-transparent"
+    >
+      DRIVING THE FUTURE
+    </h1>
 
-        <h2
-          data-aos="fade-up"
-          data-aos-delay="200"
-          className="mt-4 font-extrabold tracking-widest text-gray-200
-                     text-xl sm:text-2xl md:text-3xl"
-        >
-          THE RELATIONSHIP <br /> BETWEEN
-        </h2>
+    {/* Subheading */}
+    <h2
+      data-aos="fade-up"
+      data-aos-delay="200"
+      className="mt-4 font-extrabold text-gray-800 text-lg sm:text-xl md:text-3xl"
+    >
+      WHERE INNOVATION <br /> MEETS AUTOMATION
+    </h2>
 
-        <h1
-          data-aos="zoom-in"
-          data-aos-delay="400"
-          className="mt-3 font-[cursive]
-                     text-3xl sm:text-4xl md:text-5xl
-                     bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600
-                     bg-clip-text text-transparent"
-        >
-          Automation & Innovation
-        </h1>
+    {/* Highlight */}
+    <h1
+      data-aos="zoom-in"
+      data-aos-delay="400"
+      className="mt-3 font-[cursive] text-2xl sm:text-3xl md:text-5xl
+                 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600
+                 bg-clip-text text-transparent"
+    >
+      Intelligent Automation
+    </h1>
 
-        <div
-          data-aos="fade-right"
-          data-aos-delay="600"
-          className="w-63 h-1 mt-3 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600"
-        ></div>
+    {/* Underline */}
+    <div
+      data-aos="fade-right"
+      data-aos-delay="600"
+      className="w-32 sm:w-48 md:w-64 h-1 mt-3 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600"
+    ></div>
 
-        <p
-          data-aos="fade-up"
-          data-aos-delay="700"
-          className="mt-6 max-w-2xl text-gray-100 text-base sm:text-lg leading-relaxed tracking-wide hover:text-blue-400 transition-colors duration-300"
-        >
-          We automate the routine, so you can innovate the extraordinary
-        </p>
+    {/* Paragraph */}
+    <p
+      data-aos="fade-up"
+      data-aos-delay="700"
+      className="mt-6 max-w-full sm:max-w-xl text-gray-700 font-semibold text-sm sm:text-base md:text-lg leading-relaxed hover:text-indigo-400 transition-colors duration-300"
+    >
+      Leveraging smart systems to streamline workflows, optimize efficiency 
+      and empower businesses to achieve more with technology.
+    </p>
 
-        <button
-          data-aos="zoom-in"
-          data-aos-delay="1200"
-          onClick={handleClick}
-          className="mt-8 text-white font-semibold px-8 py-3 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600 rounded-md cursor-pointer transform transition-transform duration-500 ease-in-out hover:scale-110"
-        >
-          DISCOVER MORE
-        </button>
-      </div>
-    </header>
+    {/* Button */}
+    <button
+      data-aos="zoom-in"
+      data-aos-delay="1200"
+      onClick={handleClick}
+      className="mt-6 sm:mt-8 text-white font-semibold px-6 sm:px-8 py-2 sm:py-3 
+                 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600 
+                 rounded-md cursor-pointer transform transition-transform duration-500 ease-in-out hover:scale-105"
+    >
+      DISCOVER MORE
+    </button>
+  </div>
+</header>
+
   );
 };
 

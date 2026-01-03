@@ -36,7 +36,7 @@ function AboutUsTwo() {
       </div>
       <p className="text-gray-600 text-sm leading-relaxed">
         We automate complex workflows and deliver scalable digital
-        solutions that improve efficiency, reduce costs, and enable
+        solutions that improve efficiency, reduce costs and enable
         sustainable business growth.
       </p>
     </div>
@@ -51,7 +51,7 @@ function AboutUsTwo() {
       </div>
       <p className="text-gray-600 text-sm leading-relaxed">
         To be a globally trusted technology partner driving innovation,
-        automation, and digital transformation across industries.
+        automation and digital transformation across industries.
       </p>
     </div>
 
@@ -64,7 +64,7 @@ function AboutUsTwo() {
         </h3>
       </div>
       <p className="text-gray-600 text-sm leading-relaxed">
-        Innovation, integrity, collaboration, and a strong customer-first
+        Innovation, integrity, collaboration and a strong customer first
         mindset guide everything we do.
       </p>
     </div>
@@ -86,7 +86,7 @@ function AboutUsTwo() {
   <p className="text-gray-600 text-center mt-4 max-w-4xl mx-auto 
                 text-base md:text-lg leading-relaxed">
     We serve Governments, Public and Private Sectors, Small and Medium Enterprises,
-    Microfinancing institutions, and Cooperative Societies. Each industry is unique,
+    Microfinancing institutions and Cooperative Societies. Each industry is unique
     and we deliver tailored solutions to meet their specific needs.
   </p>
 
