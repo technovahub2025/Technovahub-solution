@@ -5,15 +5,15 @@ import poster from "../../assets/images/adspop.jpg";
 const PosterPopup = () => {
   const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
-    // Check session storage (reset every new tab or browser open)
-    const hasSeenPoster = sessionStorage.getItem("posterSeen");
+  // useEffect(() => {
+  //   // Check session storage (reset every new tab or browser open)
+  //   const hasSeenPoster = sessionStorage.getItem("posterSeen");
 
-    if (!hasSeenPoster) {
-      setShowPopup(true); // show only once per session
-      sessionStorage.setItem("posterSeen", "true"); 
-    }
-  }, []);
+  //   if (!hasSeenPoster) {
+  //     setShowPopup(true); // show only once per session
+  //     sessionStorage.setItem("posterSeen", "true"); 
+  //   }
+  // }, []);
 
   const handleClose = () => {
     setShowPopup(false);
