@@ -24,11 +24,11 @@ const cards = [
     title: "Class Rooms",
     desc: "Spacious, well-lit, and comfortable classrooms that inspire focused learning. 🌞",
   },
-{
-  icon: <MdMeetingRoom className="w-14 h-14 text-blue-600 mb-4" />,
-  title: "Seminar Hall",
-  desc: "Spacious and well-equipped hall designed for productive discussions and learning sessions.",
-}
+  {
+    icon: <MdMeetingRoom className="w-14 h-14 text-blue-600 mb-4" />,
+    title: "Seminar Hall",
+    desc: "Spacious and well-equipped hall designed for productive discussions and learning sessions.",
+  }
 ];
 
 const Ourfacilities = () => {
@@ -55,7 +55,7 @@ const Ourfacilities = () => {
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className="relative p-8 rounded-2xl backdrop-blur-md bg-white/70 shadow-lg border border-blue-100 text-center transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-gradient-to-br hover:from-blue-100/80 hover:to-cyan-100/70"
+              className="relative p-6 md:p-8 rounded-2xl backdrop-blur-md bg-white/70 shadow-lg border border-blue-100 text-center transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:bg-gradient-to-br hover:from-blue-100/80 hover:to-cyan-100/70"
               data-aos="zoom-in"
               data-aos-delay={idx * 150}
             >

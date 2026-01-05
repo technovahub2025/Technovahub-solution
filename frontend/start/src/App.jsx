@@ -26,6 +26,9 @@ import Sevenhome from "./pages/Sevenhome";
 
 
 
+import YoungInnovator from "./pages/YoungInnovator";
+
+
 // Wrapper to use location
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -34,8 +37,8 @@ const Layout = ({ children }) => {
   return (
     <div>
       {!hideHeaderFooter && <Navbar />}
-        {/* {!hideHeaderFooter && <Cursor />} */}
-      
+      {/* {!hideHeaderFooter && <Cursor />} */}
+
 
       {children}
       {!hideHeaderFooter && <Footer />}
@@ -50,7 +53,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Layout>
-        <ScrollToTop/>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<About />} />
@@ -59,7 +62,8 @@ const App = () => {
           <Route path="/courses" element={<Courses />} />
           <Route path="/softwaresolutions" element={<Softwaresol />} />
           <Route path="/7Days-AI-innovation" element={<Homeseven />} />
-    
+          <Route path="/young-innovator" element={<YoungInnovator />} />
+
           <Route path="/7Days-AI-innovation/welcome" element={<Sevenhome />} />
 
 

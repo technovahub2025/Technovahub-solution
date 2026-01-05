@@ -81,7 +81,7 @@ const SoftwareSolutions = () => {
 
     const fetchData = async () => {
       try {
-      
+
         setSolutions(services || []);
       } catch (error) {
         console.error("Error fetching software solutions:", error);
@@ -105,11 +105,11 @@ const SoftwareSolutions = () => {
           <Title text="Software Solutions" />
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto mt-12">
+        <div className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto mt-8 md:mt-12">
           {loading
             ? Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
             : solutions.length > 0
-            ? solutions.map((item, index) => (
+              ? solutions.map((item, index) => (
                 <SolutionCard
                   key={item._id}
                   title={item.title}
@@ -118,11 +118,11 @@ const SoftwareSolutions = () => {
                   icon={index % 3 === 0 ? <Cpu /> : index % 3 === 1 ? <Cloud /> : <Code />}
                 />
               ))
-            : (
-              <div className="text-gray-500 col-span-full text-center flex justify-center mb-10 items-center">
-                No software solutions available.
-              </div>
-            )}
+              : (
+                <div className="text-gray-500 col-span-full text-center flex justify-center mb-10 items-center">
+                  No software solutions available.
+                </div>
+              )}
         </div>
       </div>
     </section>
@@ -133,19 +133,19 @@ const SoftwareSolutions = () => {
 const SolutionCard = ({ title, description, aosDelay, icon }) => {
   return (
     <div
-      className="relative group bg-white/70 backdrop-blur-lg border border-white/40 rounded-2xl p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      className="relative group bg-white/70 backdrop-blur-lg border border-white/40 rounded-2xl p-6 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
       data-aos="fade-up"
       data-aos-delay={aosDelay}
     >
       {/* Gradient border glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-cyan-400/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-all duration-500"></div>
 
-      <div className="flex flex-col items-center text-center space-y-4">
-        <div className="p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
+      <div className="flex flex-col items-center text-center space-y-3 md:space-y-4">
+        <div className="p-3 md:p-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
           {icon}
         </div>
-        <h3 className="text-2xl font-bold text-blue-600">{title}</h3>
-        <p className="text-gray-700 text-base leading-relaxed">{description}</p>
+        <h3 className="text-xl md:text-2xl font-bold text-blue-600">{title}</h3>
+        <p className="text-gray-700 text-sm md:text-base leading-relaxed">{description}</p>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ export const GalleryAblum = () => {
   }, []);
 
   return (
-    <section className="relative grid  h-[50vh] mt-[100px]  w-full place-content-center overflow-hidden bg-blue-100  mb-10 ">
+    <section className="relative grid  h-[50vh] mt-[150px]  w-full place-content-center overflow-hidden bg-blue-100  mb-10 ">
       <h2 className="relative z-0 text-[10vw] font-black text-neutral-800 md:text-[200px]">
         GALLERY<span className="text-indigo-500">.</span>
       </h2>

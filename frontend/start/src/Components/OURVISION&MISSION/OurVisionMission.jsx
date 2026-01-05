@@ -26,10 +26,10 @@ const VisionMission = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
           {/* Vision */}
           <div
-            className="relative p-8 md:p-10 rounded-3xl backdrop-blur-lg bg-white/70 border border-white/40 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 text-left"
+            className="relative p-6 md:p-10 rounded-3xl backdrop-blur-lg bg-white/70 border border-white/40 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 text-left"
             data-aos="fade-right"
           >
             {/* Icon */}
@@ -53,7 +53,7 @@ const VisionMission = () => {
 
           {/* Mission */}
           <div
-            className="relative p-8 md:p-10 rounded-3xl backdrop-blur-lg bg-white/70 border border-white/40 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 text-left"
+            className="relative p-6 md:p-10 rounded-3xl backdrop-blur-lg bg-white/70 border border-white/40 shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-500 text-left"
             data-aos="fade-left"
           >
             {/* Icon */}
