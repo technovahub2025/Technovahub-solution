@@ -17,143 +17,98 @@ const Banner = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    class Neuron {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.radius = 2;
-        this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = Math.random() * 0.02 + 0.01;
-      }
+    // --------------------------------------------------------------------------
+    // 🌌 DIGITAL DATA STREAM EFFECT
+    // --------------------------------------------------------------------------
 
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
+    // Configuration
+    let columns = Math.floor(canvas.width / 20);
+    const drops = [];
+    const colors = ["#00d4ff", "#00ffff", "#7b2ff7", "#ffffff"]; // Tech palette
 
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-        this.pulse += this.pulseSpeed;
-      }
-
-      draw() {
-        const pulseSize = Math.sin(this.pulse) * 2;
-
-        // Outer glow
-        const gradient = ctx.createRadialGradient(
-          this.x,
-          this.y,
-          0,
-          this.x,
-          this.y,
-          this.radius + pulseSize + 1
-        );
-        gradient.addColorStop(0, "rgba(0, 212, 255, 0.1)");
-        gradient.addColorStop(0.5, "rgba(150, 90, 255, 0.05)");
-        gradient.addColorStop(1, "rgba(10, 14, 39, 0)");
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius + pulseSize + 10, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Core neuron
-        ctx.fillStyle = "#00d4ff";
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius + pulseSize, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Inner bright spot
-        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-        ctx.beginPath();
-        ctx.arc(this.x - 1, this.y - 1, this.radius / 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    // Initialize drops
+    for (let i = 0; i < columns; i++) {
+      drops[i] = {
+        y: Math.random() * canvas.height,
+        speed: Math.random() * 2 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        length: Math.random() * 20 + 5
+      };
     }
 
-    const neurons = [];
-    const neuronCount = 80;
-    const maxDistance = 150;
-
-    for (let i = 0; i < neuronCount; i++) {
-      neurons.push(
-        new Neuron(Math.random() * canvas.width, Math.random() * canvas.height)
-      );
-    }
-
-    const drawConnection = (n1, n2, distance) => {
-      const opacity = 1 - distance / maxDistance;
-
-      const gradient = ctx.createLinearGradient(n1.x, n1.y, n2.x, n2.y);
-      gradient.addColorStop(0, `rgba(0, 212, 255, ${opacity * 0.3})`);
-      gradient.addColorStop(0.5, `rgba(123, 47, 247, ${opacity * 0.4})`);
-      gradient.addColorStop(1, `rgba(0, 212, 255, ${opacity * 0.3})`);
-
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = opacity * 2;
-      ctx.beginPath();
-      ctx.moveTo(n1.x, n1.y);
-      ctx.lineTo(n2.x, n2.y);
-      ctx.stroke();
-    };
-
-    const animate = () => {
-      ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
+    const draw = () => {
+      // Semi-transparent background for trail effect
+      ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      for (let i = 0; i < neurons.length; i++) {
-        for (let j = i + 1; j < neurons.length; j++) {
-          const distance = Math.hypot(
-            neurons[j].x - neurons[i].x,
-            neurons[j].y - neurons[i].y
-          );
-          if (distance < maxDistance) drawConnection(neurons[i], neurons[j], distance);
+      for (let i = 0; i < drops.length; i++) {
+        const drop = drops[i];
+        const x = i * 20;
+
+        // Draw the "Data Stream"
+        const gradient = ctx.createLinearGradient(x, drop.y, x, drop.y - drop.length);
+        gradient.addColorStop(0, drop.color);
+        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+        ctx.moveTo(x, drop.y);
+        ctx.lineTo(x, drop.y - drop.length);
+        ctx.stroke();
+
+        // Add a glowing head
+        ctx.fillStyle = drop.color;
+        ctx.beginPath();
+        ctx.arc(x, drop.y, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Move drop
+        drop.y += drop.speed;
+
+        // Reset if off screen or randomly
+        if (drop.y > canvas.height && Math.random() > 0.98) {
+          drop.y = 0;
+          drop.speed = Math.random() * 2 + 1;
+          drop.length = Math.random() * 20 + 5;
+          drop.color = colors[Math.floor(Math.random() * colors.length)];
         }
       }
 
-      neurons.forEach((neuron) => {
-        neuron.update();
-        neuron.draw();
-      });
-
-      requestAnimationFrame(animate);
+      requestAnimationFrame(draw);
     };
 
-    animate();
+    const animationId = requestAnimationFrame(draw);
 
-    // Resize handling
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Re-initialize columns on resize
+      const newColumns = Math.floor(canvas.width / 20);
+      columns = newColumns; // Update columns variable
+      drops.length = 0; // Clear array
+      for (let i = 0; i < newColumns; i++) {
+        drops[i] = {
+          y: Math.random() * canvas.height,
+          speed: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          length: Math.random() * 20 + 5
+        };
+      }
     };
     window.addEventListener("resize", handleResize);
 
-    // Mouse interaction
-    const handleMouseMove = (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      neurons.forEach((neuron) => {
-        const distance = Math.hypot(mouseX - neuron.x, mouseY - neuron.y);
-        if (distance < 100) {
-          const angle = Math.atan2(mouseY - neuron.y, mouseX - neuron.x);
-          neuron.vx -= Math.cos(angle) * 0.05;
-          neuron.vy -= Math.sin(angle) * 0.05;
-        }
-      });
-    };
-    canvas.addEventListener("mousemove", handleMouseMove);
-
     return () => {
+      cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
