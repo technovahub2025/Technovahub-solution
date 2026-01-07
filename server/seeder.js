@@ -3,7 +3,14 @@ import bcrypt from "bcryptjs";
 import Admin from "./models/adminModel.js";
 import connectDB from "./config/db.js";
 
-dotenv.config();
+
+if (process.env.NODE_ENV === "production") {
+  dotenv.config({ path: ".env.production" });
+} else {
+  dotenv.config({ path: ".env.local" });
+}
+dotenv.config(); // fallback
+
 
 const seedAdmin = async () => {
   try {

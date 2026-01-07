@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   FaFacebookF,
-  FaTwitter,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
@@ -20,7 +19,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-start text-center md:text-left">
           {/* Brand Section */}
           <div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 text-transparent bg-clip-text mb-4 drop-shadow-md">
+            <h1 className="inline-block text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 text-transparent bg-clip-text mb-4 drop-shadow-md pb-2 pr-4">
               TechnovaHub
             </h1>
             <p className="text-gray-600 leading-relaxed max-w-sm mx-auto md:mx-0 text-sm md:text-base">
@@ -32,7 +31,6 @@ const Footer = () => {
             <div className="flex justify-center md:justify-start space-x-4 mt-6">
               {[
                 { icon: <FaFacebookF />, color: "hover:text-blue-600" },
-                { icon: <FaTwitter />, color: "hover:text-sky-500" },
                 { icon: <FaInstagram />, color: "hover:text-pink-500" },
                 { icon: <FaLinkedinIn />, color: "hover:text-blue-700" },
               ].map((item, i) => (
@@ -60,14 +58,13 @@ const Footer = () => {
                 { name: "About", link: "/about" },
                 { name: "Courses", link: "/courses" },
                 { name: "Contact", link: "/contact" },
-                { name: "Admin", link: "/adminlogin", special: true },
               ].map((item, i) => (
                 <li key={i}>
                   <Link
                     to={item.link}
                     className={`transition ${item.special
-                        ? "text-blue-700 font-semibold hover:text-blue-800"
-                        : "hover:text-blue-600"
+                      ? "text-blue-700 font-semibold hover:text-blue-800"
+                      : "hover:text-blue-600"
                       }`}
                   >
                     {item.name}

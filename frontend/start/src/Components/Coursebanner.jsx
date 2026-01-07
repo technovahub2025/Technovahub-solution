@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import banner1 from "../assets/images/indoor.jpg";
 import banner2 from "../assets/images/train.jpg";
-import banner3 from "../assets/images/akshaya.jpg";
 import banner4 from "../assets/images/4.jpg";
 import logo from "../assets/images/logoremove.png";
 
 const Coursebanner = () => {
-  const images = [ banner2, banner3, banner4,banner1,];
+  const images = [banner2, banner4, banner1];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const Coursebanner = () => {
   }, []);
 
   return (
-<header className="relative h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden mt-[100px]">
+    <header className="relative h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden mt-[100px]">
       {/* === Background Slideshow === */}
       <div></div>
       {images.map((img, index) => (
