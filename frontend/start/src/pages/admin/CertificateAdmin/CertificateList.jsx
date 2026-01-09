@@ -14,7 +14,22 @@ const CertificateList = ({ onEdit, refresh }) => {
     setLoading(true);
     try {
       const data = await getCertificateData();
-      setCertificates(Array.isArray(data.data) ? data.data : []);
+      let allCerts = Array.isArray(data.data) ? data.data : [];
+
+      // Add hardcoded unremovable certificate
+      const hardcodedCert = {
+        _id: "static-th-0156",
+        empID: "TH-0156",
+        empName: "AAMEER J",
+        isStatic: true, // Marker to disable delete
+      };
+
+      // Avoid duplicate if it somehow exists in DB
+      if (!allCerts.find((c) => c.empID === "TH-0156")) {
+        allCerts = [...allCerts, hardcodedCert];
+      }
+
+      setCertificates(allCerts);
     } catch (err) {
       toast.error("Failed to load certificates");
     } finally {
@@ -38,10 +53,10 @@ const CertificateList = ({ onEdit, refresh }) => {
   };
 
   if (loading) return (
-<div className="flex items-center justify-center h-[50vh] ">
+    <div className="flex items-center justify-center h-[50vh] ">
       <div className="loader"></div>
     </div>
-  ) 
+  )
 
   // Pagination logic
   const totalPages = Math.ceil(certificates.length / itemsPerPage);
@@ -75,18 +90,26 @@ const CertificateList = ({ onEdit, refresh }) => {
                 <td className="py-2 px-4 font-medium text-gray-800">{item.empID}</td>
                 <td className="py-2 px-4 text-gray-600">{item.empName}</td>
                 <td className="py-2 px-4 flex gap-2 flex-wrap">
-                  <button
-                    className="bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600 transition text-sm"
-                    onClick={() => onEdit(item)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm"
-                    onClick={() => handleDelete(item._id)}
-                  >
-                    Delete
-                  </button>
+                  {item.isStatic ? (
+                    <span className="px-3 py-1 bg-gray-200 text-gray-600 text-xs rounded-full font-semibold border border-gray-300">
+                      Protected (Permanent)
+                    </span>
+                  ) : (
+                    <>
+                      <button
+                        className="bg-indigo-500 text-white px-3 py-1 rounded hover:bg-indigo-600 transition text-sm"
+                        onClick={() => onEdit(item)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition text-sm"
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
@@ -101,11 +124,10 @@ const CertificateList = ({ onEdit, refresh }) => {
             <button
               key={i}
               onClick={() => handlePageChange(i + 1)}
-              className={`px-3 py-1 rounded border transition ${
-                currentPage === i + 1
-                  ? "bg-indigo-500 text-white border-indigo-500"
-                  : "bg-white text-indigo-600 border-indigo-300 hover:bg-indigo-100"
-              }`}
+              className={`px-3 py-1 rounded border transition ${currentPage === i + 1
+                ? "bg-indigo-500 text-white border-indigo-500"
+                : "bg-white text-indigo-600 border-indigo-300 hover:bg-indigo-100"
+                }`}
             >
               {i + 1}
             </button>
