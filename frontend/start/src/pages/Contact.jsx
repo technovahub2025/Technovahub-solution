@@ -7,13 +7,13 @@ const Contact = () => {
     {
       icon: <MapPin className="text-blue-600 w-7 h-7" />,
       title: "Address",
-      info: "48, Lawspet Main Road, Puducherry",
+      info: "No.2, Kanagam Thottam Street, Lawspet Main Road, Puducherry-605008.",
       gradient: "from-blue-100/70 via-blue-50/50 to-cyan-100/70",
     },
     {
       icon: <Phone className="text-blue-700 w-7 h-7" />,
       title: "Phone",
-      info: "+91 9360962810",
+      info: "+91 9629600230",
       gradient: "from-blue-200/70 via-blue-50/40 to-indigo-100/60",
     },
     {
