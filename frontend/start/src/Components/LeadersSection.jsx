@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import vidhyavathiImage from "../assets/leaders/vidhyavathi.jpeg";
+import vidhyavathiImage from "../assets/leaders/Vidhyavathi.jpeg";
 import arunkumarImage from "../assets/leaders/arunkumar-profile.jpg";
 
 const leaders = [
