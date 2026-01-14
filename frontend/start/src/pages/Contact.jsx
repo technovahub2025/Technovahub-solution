@@ -13,7 +13,7 @@ const Contact = () => {
     {
       icon: <Phone className="text-blue-700 w-7 h-7" />,
       title: "Phone",
-      info: "+91 9629600230",
+      info: "+91 9629600230\n+91 9003530230", 
       gradient: "from-blue-200/70 via-blue-50/40 to-indigo-100/60",
     },
     {
@@ -57,7 +57,8 @@ const Contact = () => {
                     <h3 className="text-lg font-semibold text-blue-800">
                       {card.title}
                     </h3>
-                    <p className="text-gray-700 text-sm md:text-[10px] mt-1 break-words">
+                    <p className="text-gray-700 text-sm md:text-[10px] mt-1 whitespace-pre-line break-words">
+
                       {card.info}
                     </p>
                   </div>

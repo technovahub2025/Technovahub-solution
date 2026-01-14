@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import vidhyavathiImage from "../assets/leaders/Vidhyavathi.jpeg";
-import arunkumarImage from "../assets/leaders/arunkumar-profile.jpg";
+import arunkumarImage from "../assets/leaders/arunkumar-profile.png";
 
 const leaders = [
   {
@@ -16,9 +16,9 @@ const leaders = [
     id: 2,
     img: arunkumarImage,
     name: "Arunkumar Appadoure",
-    role1: "Co-Director, Technovahub",
+    role1: "Director, Technovahub",
     role2: "Managing Director, Aroun Systems & Safety Equipments",
-    desc: "Technovahub is the latest venture of Aroun Systems and Safety Equipments. Building on our strong legacy in safety and industrial solutions, we are now stepping into the future with a mission to empower young minds and professionals with the knowledge and skills needed to thrive in the age of Artificial Intelligence. Together we can shape a future where technology drives innovation.",
+    desc: "Technovahub is the latest venture of Aroun Systems and Safety Equipments. Building on our strong legacy in safety and industrial solutions, we are now stepping into the future with a mission to empower young minds and professionals with the knowledge and skills needed to thrive in the age of Artificial Intelligence and emerging technologies. Together we can shape a future where technology drives innovation, progress and endless possibilities.",
   },
 ];
 
@@ -79,37 +79,42 @@ const LeadersSection = () => {
           </div>
 
           {/* RIGHT COLUMN: Details + Small Image */}
-          {/* Changed 'justify-between' to 'justify-start' to allow manual movement */}
-          <div className="lg:w-7/12 flex flex-col justify-start py-2 h-full">
+          <div className="lg:w-7/12 flex flex-col justify-start py-2">
             
             {/* 1. Active Leader Details */}
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={activeLeader.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <h3 className="text-3xl font-bold text-gray-900 mb-1">
-                  {activeLeader.name}
-                </h3>
-                <div className="mb-4">
-                  <p className="text-lg font-bold text-blue-600">{activeLeader.role1}</p>
-                  <p className="text-sm text-gray-500 italic mt-0.5">{activeLeader.role2}</p>
-                </div>
-                
-                <p className="text-gray-600 leading-relaxed text-base mb-8 max-w-2xl">
-                  {activeLeader.desc}
-                </p>
-                
-                <div className="w-full h-px bg-gray-100"></div>
-              </motion.div>
-            </AnimatePresence>
+            <div className="relative">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={activeLeader.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                >
+                  <h3 className="text-3xl font-bold text-gray-900 mb-1">
+                    {activeLeader.name}
+                  </h3>
+                  <div className="mb-4">
+                    <p className="text-lg font-bold text-blue-600">{activeLeader.role1}</p>
+                    <p className="text-sm text-gray-500 italic mt-0.5">{activeLeader.role2}</p>
+                  </div>
+                  
+                  {/* Fixed min-height stops the small image from moving up/down */}
+                  <div className="min-h-[140px] md:min-h-[120px]">
+                    <p className="text-gray-600 leading-relaxed text-sm max-w-2xl">
+                      {activeLeader.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Divider Line */}
+              <div className="w-full h-px bg-gray-100 mt-6"></div>
+            </div>
 
             {/* 2. Small Image (Clickable) */}
-            {/* Reduced the margin-top (mt-6) to bring it closer to the text above */}
-            <div className="flex flex-col items-start mt-6">
+            {/* The small image stays locked here */}
+            <div className="flex flex-col items-start mt-8">
               <AnimatePresence mode="wait">
                 <motion.p 
                   key={nextLeader.id}
