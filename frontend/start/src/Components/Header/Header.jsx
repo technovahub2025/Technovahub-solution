@@ -5,7 +5,7 @@ import logo from "../../assets/images/logoremove.png";
 
 const navItems = [
   { name: "HOME", path: "/" },
-  { name: "About Us", path: "/about" },
+  { name: "ABOUT US", path: "/about" },
 
   {
     name: "SERVICES",
