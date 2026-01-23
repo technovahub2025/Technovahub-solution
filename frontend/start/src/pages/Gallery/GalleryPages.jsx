@@ -10,6 +10,7 @@ const GalleryPages = () => {
         </div>
        
         <Gallery/>
+          
     </div>
   )
 }
