@@ -214,7 +214,7 @@ import Title from "../../Components/Title";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-/* ✅ IMPORT IMAGES (VITE-SAFE) */
+
 import img1 from "@/assets/gallary-img/technova-hub-lawspet-pondicherry-pondicherry-python-training-institutes-4zfvhum13c.jpg";
 import img2 from "@/assets/gallary-img/technova-hub-lawspet-pondicherry-pondicherry-python-training-institutes-6361bo634v.jpg";
 import img3 from "@/assets/gallary-img/technova-hub-lawspet-pondicherry-pondicherry-python-training-institutes-oprp2go3i3.webp";
@@ -231,7 +231,7 @@ import img12 from "@/assets/gallary-img/2025-08-26 (4).jpg.jpeg";
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  /* ✅ STATIC IMAGE ARRAY */
+ 
   const images = [
     img1,
     img2,
