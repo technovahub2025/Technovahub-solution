@@ -33,3 +33,8 @@ export const uploadGalleryImages = async (images) => {
   });
   return res.data;
 };
+
+export const getGoogleDriveConnectUrl = async () => {
+  const res = await apiClient.get("/auth/google-drive/connect");
+  return res.data.authorizationUrl;
+};

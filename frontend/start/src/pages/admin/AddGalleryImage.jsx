@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { uploadGalleryImages } from "../../api/gallaryApi"; 
+import { getGoogleDriveConnectUrl, uploadGalleryImages } from "../../api/gallaryApi";
 import toast from "react-hot-toast";
 
 const AddGalleryImage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+
+  const handleConnectDrive = async () => {
+    setConnecting(true);
+    try {
+      const authorizationUrl = await getGoogleDriveConnectUrl();
+      window.location.assign(authorizationUrl);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Unable to connect Google Drive");
+      setConnecting(false);
+    }
+  };
 
   // Handle file selection
   const handleFileChange = (e) => {
@@ -45,7 +57,14 @@ const AddGalleryImage = () => {
   };
 
   return (
-    <div className="flex justify-end  md:p-6">
+    <div className="flex justify-end gap-2 md:p-6">
+      <button
+        className="bg-white text-blue-600 border-2 border-blue-500 md:px-4 md:py-2 p-2 text-sm rounded hover:bg-blue-50 transition-all"
+        onClick={handleConnectDrive}
+        disabled={connecting}
+      >
+        {connecting ? "Connecting..." : "Connect Google Drive"}
+      </button>
       {/* Add Image Button */}
       <button
         className="bg-blue-500 text-white md:px-4 md:py-2 p-2 text-sm border-2 border-white   rounded hover:bg-blue-600 transition-all "
