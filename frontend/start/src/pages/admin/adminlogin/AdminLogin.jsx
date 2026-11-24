@@ -104,6 +104,11 @@ const AdminLogin = () => {
               {loading ? "Logging in..." : " Go to Dashboard"}
             </button>
           </div>
+          <div className="text-center -mt-6">
+            <Link to="/adminlogin/change-password" className="text-sm text-blue-300 underline hover:text-blue-200">
+              Change Password
+            </Link>
+          </div>
         </form>
       </div>
     </div>

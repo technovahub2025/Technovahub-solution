@@ -26,15 +26,21 @@ if (process.env.NODE_ENV === "production") {
 
 const app = express();
 
+// Render forwards client IPs through one trusted proxy. This keeps req.ip
+// accurate for the auth rate limiter without trusting arbitrary X-Forwarded-* headers locally.
+if (process.env.RENDER === "true") {
+  app.set("trust proxy", 1);
+}
+
 // Allowed frontend URLs
 const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:5173",
 
-  
+  "https://technovahub.in",
   "https://technova-hub-dynamic-website.vercel.app",
   "https://www.technovahub.in",
-  "https://technovahub-solution-is6vunddi-technovas-projects-37226de2.vercel.app/"
+  "https://technovahub-solution-is6vunddi-technovas-projects-37226de2.vercel.app"
 
 ];
 
